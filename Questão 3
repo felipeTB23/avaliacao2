@@ -1,0 +1,63 @@
+# 3°Quetao
+
+class Documento:
+  def __init__(self, titulo, conteudo, tipo):
+    self.titulo = titulo
+    self.conteudo = conteudo
+    self.tipo = tipo
+
+  def get_titulo(self):
+      return self.titulo
+
+  def get_conteudo(self):
+      return self.conteudo
+
+  def get_tipo(self):
+      return self.tipo 
+
+class Impressora:
+  def imprimir(self, documento):
+      print("\n=== Relatorio_de_Impressao ===")
+      print("Tipo:", documento.get_tipo())
+      print("Titulo:", documento.get_titulo())
+      print("Texto:", documento.get_conteudo())
+      print("------------------------\n")
+
+lista_documentos = []
+impressora = Impressora() 
+
+while True:
+    print("=== MENU IMPRESSORA ===")
+    print("1 - Cadastrar documento")
+    print("2 - Imprimir")
+    print("0 - Sair") 
+    opcao = input("Escolha uma opcao: ")
+    
+    if opcao == "1":
+        titulo = input("Titulo: ")
+        texto = input("Conteudo: ")
+        tipo = input("Tipo: ")
+        lista_documentos.append(Documento(titulo, texto, tipo))
+        print("Documento salvo com sucesso!\n")
+
+    elif opcao == "2":
+        if not lista_documentos:
+            print("Sem documentos cadastrados.\n")
+        else:
+            print("\n--- LISTA DE DOCUMENTOS ---")
+            for posicao, documento in enumerate(lista_documentos, start=1):
+                print(f"{posicao}. {documento.get_titulo()}")
+            print("---------------------------")
+
+            escola = int(input("Escolha o indice: "))
+            opcao_ajustado = escola - 1
+            if 0 <= opcao_ajustado < len(lista_documentos):
+                impressora.imprimir(lista_documentos[opcao_ajustado])
+            else:
+                print("Opcao invalido.\n")
+
+    elif opcao == "0":
+        print("Saindo...")
+        break
+    else:
+        print("Opcao invalida, tente novamente.\n")
